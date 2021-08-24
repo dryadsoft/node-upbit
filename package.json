@@ -16,6 +16,15 @@
     "업비트",
     "업비트 API"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dryadsoft/node-upbit.git"
+  },
+  "homepage": "https://github.com/dryadsoft/node-upbit",
+  "bugs": {
+    "url": "https://github.com/dryadsoft/node-upbit/issues",
+    "email": "dryadsoft@gmail.com"
+  },
   "scripts": {
     "build": "tsc && cp -r src/@types lib/@types",
     "prepublishOnly": "yarn build",
@@ -32,5 +41,8 @@
     "axios": "^0.21.1",
     "jsonwebtoken": "^8.5.1",
     "uuid": "^8.3.2"
+  },
+  "engines": {
+    "node": ">=12.20.1"
   }
 }
