@@ -1,6 +1,6 @@
 {
   "name": "node-upbit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "lib/index.js",
   "files": [
     "lib/**/*"
@@ -26,7 +26,7 @@
     "email": "dryadsoft@gmail.com"
   },
   "scripts": {
-    "build": "tsc && cp -r src/@types lib/@types",
+    "build": "rm -rf lib && tsc && cp -r src/@types lib/@types",
     "prepublishOnly": "yarn build",
     "dev": "ts-node example/example.ts"
   },
