@@ -5,3 +5,5 @@ example
 images
 .gitIgnore
 .npmIgnore
+.vscode
+.tsconfig

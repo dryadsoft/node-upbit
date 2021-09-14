@@ -1,6 +1,6 @@
 {
   "name": "node-upbit",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "main": "lib/index.js",
   "files": [
     "lib/**/*"
@@ -27,8 +27,9 @@
   },
   "scripts": {
     "build": "rm -rf lib && tsc && cp -r src/@types lib/@types",
+    "build_debug": "rm -rf lib && tsc -p ./.tsconfig && cp -r src/@types lib/@types",
     "prepublishOnly": "yarn build",
-    "dev": "ts-node example/example.ts"
+    "dev": "ts-node example/exam.ts"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.5",

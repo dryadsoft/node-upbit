@@ -104,3 +104,29 @@ export interface IAxiosProps {
   url: string;
   params?: {};
 }
+
+export interface IOhlcavProps {
+  market: string;
+  time: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  accPrice: number;
+  volume: number;
+}
+export interface IOhlcavOption {
+  maAvg?: number; // ma이평선값
+  bollingerHigh?: number; // 볼린저밴드 high
+  bollingerLow?: number; // 볼린저밴드 low
+  rsi?: number; // rsi지표
+  rs?: number;
+  rsiU?: number;
+  rsiD?: number;
+  rsiAU?: number;
+  rsiDU?: number;
+}
+
+export type IOhlcavExtend = IOhlcavProps & IOhlcavOption;
+export type TMinutes = "1" | "3" | "5" | "10" | "15" | "30" | "60" | "240";
+export type TCandle = TMinutes | "day";

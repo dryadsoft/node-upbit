@@ -89,6 +89,9 @@ export default class QuoationService
 
   /**
    * 일 캔들 조회 (access key 필요없음)
+   * @param marketCoin string: 마켓 코드 (ex. KRW-BTC)
+   * @param count number: 캔들 개수
+   * @param to string: 마지막 캔들 시각
    */
   async getDayCandles({ marketCoin, count, to }: ICandlesDayProps) {
     try {
