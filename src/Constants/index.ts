@@ -36,6 +36,19 @@ class Constants {
    */
   public static readonly CANDLES_DAY_URL =
     `${Constants.UBIT_SERVER_URL}/candles/days` as const;
+
+  /**
+   * 주 Candle 조회
+   */
+  public static readonly CANDLES_WEEK_URL =
+    `${Constants.UBIT_SERVER_URL}/candles/weeks` as const;
+
+  /**
+   * 월 Candle 조회
+   */
+  public static readonly CANDLES_MONTH_URL =
+    `${Constants.UBIT_SERVER_URL}/candles/months` as const;
+
   /**
    * API 키 목록 조회
    */

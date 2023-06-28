@@ -1,8 +1,12 @@
 import {
   ICandleDayReturnProps,
   ICandleReturnProps,
+  ICandleWeekReturnProps,
   ICandlesDayProps,
   ICandlesMinutesProps,
+  ICandlesMonthProps,
+  ICandlesMonthReturnProps,
+  ICandlesWeekProps,
   IMarketAllInfoProps,
   IOrderbookProps,
   ITickerProps,
@@ -36,11 +40,15 @@ export default interface QuotationInterface {
   /**
    * 주 캔들 조회 (access key 필요없음)
    */
-
+  getWeekCandles: (
+    param: ICandlesWeekProps
+  ) => Promise<ICandleWeekReturnProps[]>;
   /**
    * 월 캔들 조회 (access key 필요없음)
    */
-
+  getMonthCandles: (
+    param: ICandlesMonthProps
+  ) => Promise<ICandlesMonthReturnProps[]>;
   /******************************************************************************
    * 시세 Ticker 조회
    ******************************************************************************/

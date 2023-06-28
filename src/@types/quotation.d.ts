@@ -62,6 +62,42 @@ export interface ICandleDayReturnProps {
   change_rate: number;
 }
 
+export interface ICandlesWeekProps {
+  marketCoin: string;
+  count: number;
+  to?: string;
+}
+export interface ICandleWeekReturnProps {
+  market: string; // 마켓명 String
+  candle_date_time_utc: string; // 캔들 기준 시각(UTC 기준)
+  candle_date_time_kst: string; // 캔들 기준 시각(KST 기준)
+  opening_price: number; // 시가 Double
+  high_price: number; // 고가 Double
+  low_price: number; // 저가 Double
+  trade_price: number; // 종가 Double
+  timestamp: number; // 마지막 틱이 저장된 시각 Long
+  candle_acc_trade_price: number; // 누적 거래 금액 Double
+  candle_acc_trade_volume: number; // 누적 거래량 Double
+  first_day_of_period: string; // 캔들 기간의 가장 첫 날 String
+}
+export interface ICandlesMonthProps {
+  marketCoin: string;
+  count: number;
+  to?: string;
+}
+export interface ICandlesMonthReturnProps {
+  market: string; // 마켓명	String
+  candle_date_time_utc: string; // 캔들 기준 시각(UTC 기준)
+  candle_date_time_kst: string; // 캔들 기준 시각(KST 기준)
+  opening_price: number; // 시가 Double
+  high_price: snumbertring; // 고가 Double
+  low_price: number; // 저가 Double
+  trade_price: number; // 종가 Double
+  timestamp: number; // 마지막 틱이 저장된 시각 Long
+  candle_acc_trade_price: number; // 누적 거래 금액 Double
+  candle_acc_trade_volume: number; // 누적 거래량 Double
+  first_day_of_period: string; // 캔들 기간의 가장 첫 날 String
+}
 export interface ITickerProps {
   market: string;
   trade_date: string;

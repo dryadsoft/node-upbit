@@ -25,20 +25,32 @@ const quoationService = new QuoationService();
       count: 10,
     });
 
+    // 주 캔들 조회
+    const res4 = await quoationService.getWeekCandles({
+      marketCoin: "KRW-BTC",
+      count: 10,
+    });
+
+    // 월 캔들 조회
+    const res5 = await quoationService.getMonthCandles({
+      marketCoin: "KRW-BTC",
+      count: 10,
+    });
+
     // 현재가 정보 조회
-    const res4 = await quoationService.getTicker(["KRW-BTC"]);
+    const res6 = await quoationService.getTicker(["KRW-BTC"]);
 
     // 호가 정보 조회
-    const res5 = await quoationService.getOrderbook(["KRW-BTC"]);
+    const res7 = await quoationService.getOrderbook(["KRW-BTC"]);
 
     //전체 계좌 조회
-    const res6 = await exchangeService.getAllAccount();
+    const res8 = await exchangeService.getAllAccount();
 
     //주문 가능 정보
-    const res7 = await exchangeService.getOrderChance("KRW-XRP");
+    const res9 = await exchangeService.getOrderChance("KRW-XRP");
 
     // API 키 리스트 조회
-    const res8 = await exchangeService.getApiKeyStatus();
+    const res10 = await exchangeService.getApiKeyStatus();
   } catch (err) {
     console.log(err);
   }

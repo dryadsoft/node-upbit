@@ -1,8 +1,12 @@
 import {
   ICandleDayReturnProps,
   ICandleReturnProps,
+  ICandleWeekReturnProps,
   ICandlesDayProps,
   ICandlesMinutesProps,
+  ICandlesMonthProps,
+  ICandlesMonthReturnProps,
+  ICandlesWeekProps,
   IMarketAllInfoProps,
   IMarketCoinProps,
   IOrderbookProps,
@@ -29,7 +33,7 @@ export default class QuoationService
   /**
    * 마켓 코드 조회 (access key 필요없음)
    */
-  async getMarketAllInfo() {
+  async getMarketAllInfo(): Promise<IMarketAllInfoProps> {
     try {
       const { data } = await super.getData<IMarketCoinProps[]>({
         method: "GET",
@@ -50,6 +54,7 @@ export default class QuoationService
       return returnObj;
     } catch (err) {
       const {
+        //@ts-ignore
         response: { data },
       } = err;
       throw data;
@@ -67,7 +72,7 @@ export default class QuoationService
     marketCoin,
     count,
     to,
-  }: ICandlesMinutesProps) {
+  }: ICandlesMinutesProps): Promise<ICandleReturnProps[]> {
     try {
       const { data } = await super.getData<ICandleReturnProps[]>({
         method: "GET",
@@ -81,6 +86,7 @@ export default class QuoationService
       return data.reverse();
     } catch (err) {
       const {
+        //@ts-ignore
         response: { data },
       } = err;
       throw data;
@@ -93,7 +99,11 @@ export default class QuoationService
    * @param count number: 캔들 개수
    * @param to string: 마지막 캔들 시각
    */
-  async getDayCandles({ marketCoin, count, to }: ICandlesDayProps) {
+  async getDayCandles({
+    marketCoin,
+    count,
+    to,
+  }: ICandlesDayProps): Promise<ICandleDayReturnProps[]> {
     try {
       const { data } = await super.getData<ICandleDayReturnProps[]>({
         method: "GET",
@@ -105,6 +115,7 @@ export default class QuoationService
       return data.reverse();
     } catch (err) {
       const {
+        //@ts-ignore
         response: { data },
       } = err;
       throw data;
@@ -114,11 +125,53 @@ export default class QuoationService
   /**
    * 주 캔들 조회 (access key 필요없음)
    */
+  async getWeekCandles({
+    marketCoin,
+    count,
+    to,
+  }: ICandlesWeekProps): Promise<ICandleWeekReturnProps[]> {
+    try {
+      const { data } = await super.getData<ICandleWeekReturnProps[]>({
+        method: "GET",
+        url: `${
+          Constants.CANDLES_WEEK_URL
+        }/?market=${marketCoin}&count=${count}${to ? `&to=${to}` : ""}`,
+      });
 
+      return data.reverse();
+    } catch (err) {
+      const {
+        //@ts-ignore
+        response: { data },
+      } = err;
+      throw data;
+    }
+  }
   /**
    * 월 캔들 조회 (access key 필요없음)
    */
+  async getMonthCandles({
+    marketCoin,
+    count,
+    to,
+  }: ICandlesMonthProps): Promise<ICandlesMonthReturnProps[]> {
+    try {
+      const { data } = await super.getData<ICandlesMonthReturnProps[]>({
+        method: "GET",
+        url: `${
+          Constants.CANDLES_MONTH_URL
+        }/?market=${marketCoin}&count=${count}${to ? `&to=${to}` : ""}`,
+      });
 
+      return data.reverse();
+    } catch (err) {
+      const {
+        //@ts-ignore
+        response: { data },
+      } = err;
+      throw data;
+    }
+  }
   /******************************************************************************
    * 시세 Ticker 조회
    ******************************************************************************/
@@ -138,6 +191,7 @@ export default class QuoationService
       return data;
     } catch (err) {
       const {
+        //@ts-ignore
         response: { data },
       } = err;
       throw data;
@@ -162,6 +216,7 @@ export default class QuoationService
       return data;
     } catch (err) {
       const {
+        //@ts-ignore
         response: { data },
       } = err;
       throw data;

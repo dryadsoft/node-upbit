@@ -10,6 +10,13 @@ export default class CustomAxios extends AuthorizationToken {
     super(UBIT_ACCESS_KEY, UBIT_SECRET_KEY);
   }
 
+  private newAbortSignal(timeoutMs = 3000): [AbortSignal, NodeJS.Timeout] {
+    const abortController = new AbortController();
+    const abortTimeoutId = setTimeout(() => abortController.abort(), timeoutMs);
+
+    return [abortController.signal, abortTimeoutId];
+  }
+
   /**
    * getData
    * 업비트 ACCESS_KEY, SECRET_KEY 필요없이 사용가능한 API
@@ -20,11 +27,26 @@ export default class CustomAxios extends AuthorizationToken {
     method,
     url,
   }: IAxiosProps): Promise<AxiosResponse<T>> {
-    const res = await axios({
+    const [signal, timeoutId] = this.newAbortSignal(3000);
+    return axios({
       method,
       url,
-    });
-    return res;
+      signal,
+    })
+      .catch((err) => {
+        if (err.response) {
+          throw err;
+        } else if (err.request) {
+          console.log(err.request);
+          throw { response: { data: "request error" } };
+        } else {
+          console.log(err.config);
+          throw { response: { data: err.message } };
+        }
+      })
+      .finally(() => {
+        clearTimeout(timeoutId);
+      });
   }
 
   /**
@@ -38,13 +60,28 @@ export default class CustomAxios extends AuthorizationToken {
     method,
     url,
   }: IAxiosProps): Promise<AxiosResponse<T>> {
+    const [signal, timeoutId] = this.newAbortSignal();
     const authorizationToken = super.getAuthorizationTokenNoParam();
-    const res = await axios({
+    return axios({
       method,
       url,
       headers: { Authorization: authorizationToken },
-    });
-    return res;
+      signal,
+    })
+      .catch((err) => {
+        if (err.response) {
+          throw err;
+        } else if (err.request) {
+          console.log(err.request);
+          throw { response: { data: "request error" } };
+        } else {
+          console.log(err.config);
+          throw { response: { data: err.message } };
+        }
+      })
+      .finally(() => {
+        clearTimeout(timeoutId);
+      });
   }
 
   /**
@@ -58,12 +95,28 @@ export default class CustomAxios extends AuthorizationToken {
     url,
     params = {},
   }: IAxiosProps): Promise<AxiosResponse<T>> {
+    const [signal, timeoutId] = this.newAbortSignal();
     const { authorizationToken, query } = super.getAuthorizationToken(params);
     const res = await axios({
       method,
       url: `${url}?${query}`,
       headers: { Authorization: authorizationToken },
-    });
+      signal,
+    })
+      .catch((err) => {
+        if (err.response) {
+          throw err;
+        } else if (err.request) {
+          console.log(err.request);
+          throw { response: { data: "request error" } };
+        } else {
+          console.log(err.config);
+          throw { response: { data: err.message } };
+        }
+      })
+      .finally(() => {
+        clearTimeout(timeoutId);
+      });
     return res;
   }
 }
