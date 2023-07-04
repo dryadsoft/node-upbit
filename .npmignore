@@ -3,7 +3,7 @@ src
 example
 .env
 images
-.gitIgnore
-.npmIgnore
+.gitignore
+.npmignore
 .vscode
 .tsconfig
